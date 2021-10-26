@@ -1,0 +1,18 @@
+.form_blade{
+    
+}
+.paper {
+    margin: 3em 5em 5em 5em;
+    padding: 1em 2em;
+}
+.MuiPaper-root.paper.MuiPaper-elevation1.MuiPaper-rounded{
+    
+    background-color: aliceblue;
+  }
+.header{
+    padding: 1em 2em;
+    font-size: 2em;
+    background-color: floralwhite;
+    font-weight: 900;
+    font-style:oblique;
+}
