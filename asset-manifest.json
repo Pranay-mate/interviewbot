@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/interviewbot/static/css/main.015b7b12.chunk.css",
+    "main.js": "/interviewbot/static/js/main.20d56188.chunk.js",
+    "main.js.map": "/interviewbot/static/js/main.20d56188.chunk.js.map",
+    "runtime-main.js": "/interviewbot/static/js/runtime-main.54e8420e.js",
+    "runtime-main.js.map": "/interviewbot/static/js/runtime-main.54e8420e.js.map",
+    "static/js/2.1c2d3b56.chunk.js": "/interviewbot/static/js/2.1c2d3b56.chunk.js",
+    "static/js/2.1c2d3b56.chunk.js.map": "/interviewbot/static/js/2.1c2d3b56.chunk.js.map",
+    "static/js/3.bfb5c63a.chunk.js": "/interviewbot/static/js/3.bfb5c63a.chunk.js",
+    "static/js/3.bfb5c63a.chunk.js.map": "/interviewbot/static/js/3.bfb5c63a.chunk.js.map",
+    "index.html": "/interviewbot/index.html",
+    "static/css/main.015b7b12.chunk.css.map": "/interviewbot/static/css/main.015b7b12.chunk.css.map",
+    "static/js/2.1c2d3b56.chunk.js.LICENSE.txt": "/interviewbot/static/js/2.1c2d3b56.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.54e8420e.js",
+    "static/js/2.1c2d3b56.chunk.js",
+    "static/css/main.015b7b12.chunk.css",
+    "static/js/main.20d56188.chunk.js"
+  ]
+}
