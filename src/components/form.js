@@ -41,8 +41,8 @@ handleOnSubmit = event => {
     console.log(this.state)
     console.log(event)
     const res = '';
-    axios.post('http://localhost:5000/', this.state)
-    // axios.post('https://protected-citadel-70366.herokuapp.com/', this.state)
+    // axios.post('http://localhost:5000/', this.state)
+    axios.post('https://protected-citadel-70366.herokuapp.com/', this.state)
     .then(response =>{
         this.setState({ res: response });
         console.log(response)
