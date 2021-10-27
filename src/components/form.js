@@ -2,14 +2,10 @@ import React, { Component } from 'react';
 import './form.css';
 // import { connect } from 'react-redux';
 // import { getProfile, addProfile, updateProfile, deleteProfile } from '../redux/profile/profileActions.js';
-import { TextField, Button, Typography, Paper, Radio, RadioGroup, FormLabel } from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Radio, RadioGroup, FormLabel, Grid, Backdrop, CircularProgress } from '@material-ui/core';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
-import Backdrop from '@material-ui/core/Backdrop';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import $ from 'jquery';
 import SaveIcon from '@material-ui/icons/Save';
 import Select from '@material-ui/core/Select';
@@ -17,44 +13,82 @@ import FormControl from '@material-ui/core/FormControl';
 
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
-
+import Chat from './chat.js'
+import { ToastContainer, toast } from 'react-toastify';
+import ReplayOutlined from '@material-ui/icons/ReplayOutlined';
+import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
 class Form extends Component {
 
   state = {
-      res : ''
+    showChatBox : 'hide'
   };
   componentDidMount(){
-  }
+      
+}
 
-  handleChange = event => {
+handleChange = event => {
     event.preventDefault();
     const {target: {name, value}} = event;
     this.setState({ [name]: value});
-
+    
     console.log(value)
     console.log(this.state)
-  };
-   
-  handleOnSubmit = event => {
+};
+
+handleOnSubmit = event => {
     console.log(this.state)
     console.log(event)
     const res = '';
     axios.post('http://localhost:5000/', this.state)
-    .then(response => this.setState({ res: response }))
+    // axios.post('https://protected-citadel-70366.herokuapp.com/', this.state)
+    .then(response =>{
+        this.setState({ res: response });
+        console.log(response)
+        if((typeof(response.data) != "undefined") && response.data != 'failed'){
+            this.setState({ showChatBox: 'show'});
+            toast.success("Hey! "+response.data.Name+" your interview has been sheduled");
+        }else{
+            toast.error("Error! Please submit all the details.");
+        }
+    })
     .catch(error => {
         this.setState({ errorMessage: error.message });
         console.error('There was an error!', error);
+        toast.error("Error! Please submit all the details.");
+
     });
     console.log(res)
   }
+
+  resetForm = event => {
+    this.setState({ Name: ''});
+    this.loader();
+      
+  }
+
+  loader = () => {
+    this.setState({isLoading: true});
+    setInterval(() => {
+    window.location.reload(); 
+    this.setState({isLoading: false});
+    }, 1000);
+  }
+
     render(){
-        
         return(
             <div className="form-container form_blade">
+
                 <Paper className='paper'>
-                    <h3>Please provide us the following details for interview based on your skills!</h3>
+                <Grid container spacing={2}>
+                    <Grid item xs={12} md={10}>
+                         <h3>Please provide us the following details for interview based on your skills!</h3>
+                    </Grid>
+                    <Grid item xs={12} md={2} className='ResetButton'>
+                        <Button variant="contained" color="primary" startIcon={<ReplayOutlined />}  onClick={()=> this.resetForm(this.state)}  >Reset  </Button>
+                    </Grid>
+                </Grid>
                   <TextField InputLabelProps={{ shrink: true }} name="Name" variant="outlined" label="Name" fullWidth margin="dense" value={this.state.Name}  onChange={this.handleChange} />
 
                     <FormControl className='Language' fullWidth>
@@ -109,6 +143,7 @@ class Form extends Component {
                     <FormLabel component="legend">Shell Scripting</FormLabel>
                     <RadioGroup row aria-label="shellScript" name="shell" value={this.state.shell}
                     onChange={this.handleChange}>
+                        
                         <FormControlLabel value="yes" control={<Radio />} label="Yes" />
                         <FormControlLabel value="no" control={<Radio />} label="No" />
                         
@@ -117,6 +152,12 @@ class Form extends Component {
 
                     </FormControl>
                   </Paper>
+                  { (this.state.showChatBox === 'show') ?   <Chat></Chat> : null }
+                 <ToastContainer />
+                 <Backdrop className='' open={this.state.isLoading} style={{ 'z-index': "1201"}} >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
+
             </div>
         );
     }

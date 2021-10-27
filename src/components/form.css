@@ -16,3 +16,15 @@
     font-weight: 900;
     font-style:oblique;
 }
+.ResetButton{
+    text-align: center;
+    position: relative;
+    top: 8px;
+}
+@media only screen and (max-width: 600px) {
+    .ResetButton{
+        text-align: center;
+        position: relative;
+        top: -15px;
+    }
+  }
